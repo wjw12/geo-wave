@@ -21,8 +21,8 @@ module.exports = async (req, res) => {
     res.status(200).end()
     return
   }
-  const {body} = req;
-  if (!body) return;
+  //const {body} = req;
+  //if (!body) return;
   const db = await connectToDatabase(process.env.MONGODB_URI)
   const collection = await db.collection('datasource')
 
