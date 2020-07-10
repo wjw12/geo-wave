@@ -26,8 +26,7 @@ module.exports = async (req, res) => {
   const db = await connectToDatabase(process.env.MONGODB_URI)
   const collection = await db.collection('datasource')
 
-  const result = await collection.find({});
-
+  const result = await collection.find({}).toArray();
+  console.log(result);
   res.status(200).send(result);
-  //db.close();
 }
