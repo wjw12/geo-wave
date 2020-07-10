@@ -30,7 +30,39 @@ module.exports = async (req, res) => {
   if (body.ip) {
       // https://www.twilio.com/blog/2017/08/http-requests-in-node-js.html
       axios.get('http://ip-api.com/json/' + body.ip)
-        .then(response => {
+        .then(async response => {
+            if (response.data && response.data.status == 'success') {
+                const [lat, lon] = [response.data.lat, response.data.lon];
+                const query = {
+                    location: {
+                        type: 'Point',
+                        coordinates: [lat, lon]
+                    }
+                };
+                const result = await collection.findOne(query);
+                console.log(result);
+                if (result) {
+                    const timeList = result.times;
+                    timeList.push(Date.now())
+                    await collection.update(query, {
+                        times: timeList,
+                        location: {
+                            type: 'Point',
+                            coordinates: [lat, lon]
+                        }
+                    })
+                }
+                else {
+                    await collection.insert({
+                        times: [Date.now()],
+                        location: {
+                            type: 'Point',
+                            coordinates: [lat, lon]
+                        }
+                    })
+                }
+
+            }
             res.status(200).send(response.data)
         })
         .catch(error => {
@@ -41,4 +73,5 @@ module.exports = async (req, res) => {
       res.status(400).send("")
   }
 
+  //db.close();
 }

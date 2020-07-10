@@ -13,7 +13,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx webpack && cp src/index.html dist/index.html"
+    "build": "npx webpack && cp src/index.html public/index.html"
   },
   "repository": {
     "type": "git",
