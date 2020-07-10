@@ -1,6 +1,6 @@
 const url = require('url')
 const MongoClient = require('mongodb').MongoClient
-var axios = require('axios');
+const axios = require('axios');
 
 let cachedDb = null
 
