@@ -18,7 +18,8 @@ $.getJSON('https://api.ipify.org?format=json', function(data){
 window.dumpdb = () => {
     axios.post(baseApi + 'getAll').then(
         response => {
-            $('#main-text').text(response.data);
+            $('#main-text').text(JSON.stringify(response.data));
+            
         }
     )
 }
