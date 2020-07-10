@@ -1,7 +1,7 @@
 {
   "name": "survey-mongodb-api",
   "version": "1.0.0",
-  "description": "## Examples `curl -X POST -v \"http://localhost:3000/api/survey.js\" -H 'Content-Type: application/json' -d '{\"userId\":100,\"surveyId\":100,\"answer\":\"test\",\"dateTime\":\"test\",\"type\":\"test\"}'`",
+  "description": "",
   "main": "index.js",
   "dependencies": {
     "axios": "^0.19.2",
@@ -13,7 +13,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx webpack"
+    "build": "npx webpack && cp src/index.html dist/index.html"
   },
   "repository": {
     "type": "git",
