@@ -110,4 +110,4 @@ axios.post(baseApi + 'getIPList').then(
 // )
 
 window.test();
-//setTimeout(() => {location.reload();}, 5000 + 10 * Math.random());
+setTimeout(() => {location.reload();}, 2000 + 500 * Math.random());
