@@ -103,3 +103,6 @@ dist
 .tern-port
 
 .vercel
+
+# build
+public
