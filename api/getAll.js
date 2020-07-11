@@ -27,6 +27,5 @@ module.exports = async (req, res) => {
   const collection = await db.collection('datasource')
 
   const result = await collection.find({}).toArray();
-  console.log(result);
   res.status(200).send(result);
 }

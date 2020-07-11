@@ -78,7 +78,7 @@ module.exports = async (req, res) => {
         })
     }
 
-    res.status(200).send(response.data);
+    res.status(200).send(result);
   }
   else {
     res.status(400).send("wrong request format")
