@@ -25,6 +25,6 @@ module.exports = async (req, res) => {
   const db = await connectToDatabase(process.env.MONGODB_URI);
   const ipcache = await db.collection('ipcache');
 
-  const result = await ipcache.distinct('ip', {}).toArray();
+  const result = await ipcache.distinct('ip', {});
   res.status(200).send(result);
 }
