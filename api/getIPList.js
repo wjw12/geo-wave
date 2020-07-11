@@ -32,6 +32,6 @@ module.exports = async (req, res) => {
     else {
       res.status(200).send(docs);
     }
+    return;
   });
-  res.status(400).send("");
 }
