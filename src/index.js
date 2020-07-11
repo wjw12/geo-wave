@@ -35,7 +35,7 @@ axios.post(baseApi + 'getIPList').then(
 
         if (ipList) {
             ipList.forEach(async (element) => {
-                axios.post(baseApi + 'getInfoFromIP').then(
+                axios.post(baseApi + 'getInfoFromIP', {ip: element}).then(
                     resp => {
                         const data = resp.data;
                         const [y, x] = data.location.coordinates;

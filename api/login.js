@@ -23,7 +23,10 @@ module.exports = async (req, res) => {
     return;
   }
   const {body} = req;
-  if (!body) return;
+  if (!body) {
+      res.status(400).send("");
+      return;
+  }
   const db = await connectToDatabase(process.env.MONGODB_URI);
   const collection = await db.collection('datasource');
   const ipcache = await db.collection('ipcache');

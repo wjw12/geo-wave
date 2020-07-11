@@ -22,27 +22,28 @@ module.exports = async (req, res) => {
     return
   }
   const {body} = req;
-  if (!body) return;
-  const db = await connectToDatabase(process.env.MONGODB_URI)
-  const collection = await db.collection('datasource');
-  const ipcache = await db.collection('ipcache');
+  if (body) {
+    const db = await connectToDatabase(process.env.MONGODB_URI)
+    const collection = await db.collection('datasource');
+    const ipcache = await db.collection('ipcache');
 
-  // assume ip saved in cache
-  if (body.ip) {
-    let geodata = await ipcache.findOne({ip: body.ip}); 
-    if (geodata) {
-      geodata = geodata.data;
-      const [lat, lon] = [geodata.lat, geodata.lon];
-      const query = {
-          location: {
-              type: 'Point',
-              coordinates: [lat, lon]
-          }
-      };
-      const result = await collection.findOne(query);
-      if (result) {
-        res.status(200).send(result);
-        return;
+    // assume ip saved in cache
+    if (body.ip) {
+      let geodata = await ipcache.findOne({ip: body.ip}); 
+      if (geodata) {
+        geodata = geodata.data;
+        const [lat, lon] = [geodata.lat, geodata.lon];
+        const query = {
+            location: {
+                type: 'Point',
+                coordinates: [lat, lon]
+            }
+        };
+        const result = await collection.findOne(query);
+        if (result) {
+          res.status(200).send(result);
+          return;
+        }
       }
     }
   }
