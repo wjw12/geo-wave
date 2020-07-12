@@ -39,7 +39,7 @@ axios.post(baseApi + 'getIPList').then(
             const divElements = [];
 
             Promise.all(
-                ipList.map(async (ip) => {
+                ipList.map(async (ip, idx) => {
                     const resp = await axios.post(baseApi + 'getInfoFromIP', {ip: ip});
                     const data = resp.data;
                     const [y, x] = data.location.coordinates;
@@ -56,7 +56,7 @@ axios.post(baseApi + 'getIPList').then(
                     .css('left', x_center + 'px')
                     .css('top', y_center + 'px');
 
-                    $('#content').append(textbox);
+                    //$('#content').append(textbox);
                     textElements.push(textbox);
 
                     const el = $('<div></div>')
@@ -68,7 +68,8 @@ axios.post(baseApi + 'getIPList').then(
                     .css('background', 'repeating-radial-gradient(circle, black, grey ' + radial +'%')
                     .css('mask-image', 'radial-gradient(circle at center, white, black)')
                     .css('mix-blend-mode', 'difference')
-                    .css('visibility', 'hidden');
+                    .css('visibility', 'hidden')
+                    .css('z-index', idx);
 
                     $('#content').append(el);
                     divElements.push(el);
@@ -82,7 +83,7 @@ axios.post(baseApi + 'getIPList').then(
                 divElements.forEach((element) => {
                     element.css('visibility', 'visible');
                 });
-                setTimeout(() => {location.reload();}, 100 + 500 * Math.random());
+                setTimeout(() => {location.reload();}, 1000 + 500 * Math.random());
             })
         }
     }
