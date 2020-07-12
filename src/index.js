@@ -36,6 +36,7 @@ axios.post(baseApi + 'getIPList').then(
         if (ipList) {
             // const waveElements = [];
             const textElements = [];
+            const divElements = [];
 
             Promise.all(
                 ipList.map(async (ip) => {
@@ -67,14 +68,21 @@ axios.post(baseApi + 'getIPList').then(
                     .css('background', 'repeating-radial-gradient(circle, black, grey ' + radial +'%')
                     .css('mask-image', 'radial-gradient(circle at center, white, black)')
                     .css('mix-blend-mode', 'difference')
+                    .css('visibility', 'hidden');
 
                     $('#content').append(el);
+                    divElements.push(el);
+
                 })
             )
             .then(() => {
                 textElements.forEach((element) => {
                     element.css('visibility', 'hidden');
-                })
+                });
+                divElements.forEach((element) => {
+                    element.css('visibility', 'visible');
+                });
+                setTimeout(() => {location.reload();}, 100 + 500 * Math.random());
             })
         }
     }
@@ -110,4 +118,3 @@ axios.post(baseApi + 'getIPList').then(
 // )
 
 window.test();
-setTimeout(() => {location.reload();}, 2000 + 500 * Math.random());
